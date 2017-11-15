@@ -1,6 +1,6 @@
 class Feed {
     constructor(){
-        this.view = Ti.UI.createScrollView({top:150});
+        this.view = Ti.UI.createScrollView({top:180});
         this.data = [];
         this.offset = 0;
     }

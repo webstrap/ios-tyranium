@@ -20,7 +20,7 @@ var win = Ti.UI.createWindow({
     width: "100%",
   });
 
-const label = Ti.UI.createLabel({
+/** const label = Ti.UI.createLabel({
     color: '#111',
     font: { 
         fontSize:48,
@@ -35,12 +35,21 @@ const label = Ti.UI.createLabel({
     top: 30,
     width: Ti.UI.SIZE, height: Ti.UI.SIZE
   });
+  */
+const screenWidth = Ti.Platform.displayCaps.platformWidth;
+const image = Ti.UI.createImageView({
+    image:'/assets/images/braunhamburg.png',
+    top: 0,
+    left: 0,
+    height: 170,
+    width: screenWidth,
+});
 const Feed = require("./views/feed");
 const feed = new Feed();
 feed.addStories(data);
 feed.addStories(data);
 feed.addStories(data);
 feed.addStories(data);
-win.add(label);
+win.add(image);
 win.add(feed.view);
 win.open();
