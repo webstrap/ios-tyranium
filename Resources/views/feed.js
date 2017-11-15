@@ -1,8 +1,8 @@
 class Feed {
     constructor(){
-        this.view = Ti.UI.createScrollView({top:180});
+        this.view = Ti.UI.createScrollView({top:170});
         this.data = [];
-        this.offset = 0;
+        this.offset = 10;
     }
 
     addStories(stories){
@@ -33,7 +33,7 @@ class Feed {
             
             const screenWidth = Ti.Platform.displayCaps.platformWidth;
             const image = Ti.UI.createImageView({
-                image:'https://img.styla.com/resizer/sfh_800x0/instagram-vipp-wohnen-im-design-himmel_81784_11168.jpeg',
+                image: `https://img.styla.com/resizer/sfc_${screenWidth}x300/_${story.image}`,
                 top: 24,
                 left: 0,
                 height: 300,
@@ -48,6 +48,7 @@ class Feed {
                     fontSize: 12,
                     fontFamily: "Georgia",
                 },
+                width: screenWidth - 30
             });
             
             storyView.add(title);

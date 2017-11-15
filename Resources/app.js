@@ -1,3 +1,6 @@
+const Feed = require("./views/feed");
+const Customer = require('./datasource');
+
 const data = [{
     title:"Braun Hamburg",
     body: "Cool Magazine"
@@ -35,7 +38,12 @@ var win = Ti.UI.createWindow({
     top: 30,
     width: Ti.UI.SIZE, height: Ti.UI.SIZE
   });
-  */
+*/
+
+const feed = new Feed();
+
+win.add(feed.view);
+
 const screenWidth = Ti.Platform.displayCaps.platformWidth;
 const image = Ti.UI.createImageView({
     image:'/assets/images/braunhamburg.png',
@@ -44,12 +52,25 @@ const image = Ti.UI.createImageView({
     height: 170,
     width: screenWidth,
 });
-const Feed = require("./views/feed");
-const feed = new Feed();
-feed.addStories(data);
-feed.addStories(data);
-feed.addStories(data);
-feed.addStories(data);
+
 win.add(image);
-win.add(feed.view);
+
 win.open();
+
+(new Customer('braunhamburg')).getFeed(10).then(data => {
+    feed.addStories(data.stories.map(datum => {
+        const candidates = Object.keys(data.images).map(item =>
+            data.images[item]
+        )
+        .filter(item => (item && item.id === datum.images[0].id));
+
+        const candidate = candidates && candidates.shift();
+        const fileName = candidate && candidate.fileName;
+
+        return {
+            title: datum.title,
+            body: datum.configuration.metaDescription,
+            image: fileName
+        }
+    }));
+}).catch(e => console.log(e))
