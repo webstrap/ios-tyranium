@@ -12,7 +12,7 @@ class Feed {
             const storyView = Titanium.UI.createView({
                 top: this.offset,
                 left: 0,
-                height: 351,
+                height: 360,
             });
         
             storyView.addEventListener("click", function(){
@@ -20,21 +20,22 @@ class Feed {
                 setTimeout(function(){storyView.backgroundColor = "#FFF";}, 100);
             });
         
+            const screenWidth = Ti.Platform.displayCaps.platformWidth;
             const title = Ti.UI.createLabel({
                 text: story.title,
                 font:{
                     fontWeight: 'bold',
-                    fontSize: 14,
+                    fontSize: 20,
                     fontFamily: "Georgia",
                 },
                 top: 5,
                 left: 15,
+                width: screenWidth - 30
             });
             
-            const screenWidth = Ti.Platform.displayCaps.platformWidth;
             const image = Ti.UI.createImageView({
                 image: `https://img.styla.com/resizer/sfc_${screenWidth}x300/_${story.image}`,
-                top: 24,
+                top: 30,
                 left: 0,
                 height: 300,
                 width: screenWidth,
@@ -42,7 +43,7 @@ class Feed {
 
             const body = Ti.UI.createLabel({
                 text: story.body,
-                top: 324,
+                top: 330,
                 left: 15,
                 font:{
                     fontSize: 12,
@@ -56,7 +57,7 @@ class Feed {
             storyView.add(body);
         
             this.view.add(storyView);
-            this.offset += 351;
+            this.offset += 360;
         });
     }
 }
