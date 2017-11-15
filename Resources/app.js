@@ -23,7 +23,7 @@ const label = Ti.UI.createLabel({
     color: '#900',
     font: { fontSize:48 },
     shadowColor: '#aaa',
-    shadowOffset: {x:5, y:5},
+    shadowOffset: {x:2, y:2},
     shadowRadius: 3,
     text: 'Styla Magazine',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
