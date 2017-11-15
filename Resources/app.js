@@ -16,16 +16,21 @@ var win = Ti.UI.createWindow({
     backgroundColor: 'white',
     exitOnClose: true,
     fullscreen: false,
-    title: 'Styla Magazine'
+    title: 'Styla Magazine',
+    width: "100%",
   });
 
 const label = Ti.UI.createLabel({
-    color: '#900',
-    font: { fontSize:48 },
+    color: '#111',
+    font: { 
+        fontSize:48,
+        fontWeight: 'bold',
+        fontFamily: "GillSans",
+    },
     shadowColor: '#aaa',
-    shadowOffset: {x:2, y:2},
+    shadowOffset: {x:1, y:1},
     shadowRadius: 3,
-    text: 'Styla Magazine',
+    text: 'Braun Hamburg Magazine',
     textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
     top: 30,
     width: Ti.UI.SIZE, height: Ti.UI.SIZE

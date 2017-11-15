@@ -1,8 +1,8 @@
 class Feed {
     constructor(){
-        this.view = Ti.UI.createScrollView({top:50});
+        this.view = Ti.UI.createScrollView({top:150});
         this.data = [];
-        this.offset = 50;
+        this.offset = 0;
     }
 
     addStories(stories){
@@ -11,7 +11,8 @@ class Feed {
             
             const storyView = Titanium.UI.createView({
                 top: this.offset,
-                height: 251,
+                left: 0,
+                height: 351,
             });
         
             storyView.addEventListener("click", function(){
@@ -21,23 +22,32 @@ class Feed {
         
             const title = Ti.UI.createLabel({
                 text: story.title,
+                font:{
+                    fontWeight: 'bold',
+                    fontSize: 14,
+                    fontFamily: "Georgia",
+                },
                 top: 5,
-                left: 5,
-                fontSize: 14,
+                left: 15,
             });
-        
-            var image = Ti.UI.createImageView({
-                image:'https://img.styla.com/resizer/sfh_600x0/instagram-vipp-wohnen-im-design-himmel_81784_11168.jpeg',
+            
+            const screenWidth = Ti.Platform.displayCaps.platformWidth;
+            const image = Ti.UI.createImageView({
+                image:'https://img.styla.com/resizer/sfh_800x0/instagram-vipp-wohnen-im-design-himmel_81784_11168.jpeg',
                 top: 24,
-                height: "auto",
-                width: Ti.Platform.displayCaps.platformWidth,
+                left: 0,
+                height: 300,
+                width: screenWidth,
             });
 
             const body = Ti.UI.createLabel({
                 text: story.body,
-                top: 224,
-                left: 5,
-                fontSize: 12,
+                top: 324,
+                left: 15,
+                font:{
+                    fontSize: 12,
+                    fontFamily: "Georgia",
+                },
             });
             
             storyView.add(title);
@@ -45,7 +55,7 @@ class Feed {
             storyView.add(body);
         
             this.view.add(storyView);
-            this.offset += 251;
+            this.offset += 351;
         });
     }
 }
