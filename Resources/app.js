@@ -1,19 +1,6 @@
 const Feed = require("./views/feed");
 const Customer = require('./datasource');
 
-const data = [{
-    title:"Braun Hamburg",
-    body: "Cool Magazine"
-},{
-    title:"Braun Hamburg 2i 2i",
-    body: "Cool Magazine"
-},{
-    title:"Braun Hamburg 3",
-    body: "Cool Magazine"
-},{
-    title:"Braun Hamburg 3",
-    body: "Cool Magazine"
-}];
 
 var win = Ti.UI.createWindow({
     backgroundColor: 'white',
@@ -22,6 +9,12 @@ var win = Ti.UI.createWindow({
     title: 'Styla Magazine',
     width: "100%",
   });
+
+const mainWin = Titanium.UI.iOS.createNavigationWindow({
+    window: win
+ });
+
+mainWin.hideNavBar();
 
 /** const label = Ti.UI.createLabel({
     color: '#111',
@@ -40,7 +33,7 @@ var win = Ti.UI.createWindow({
   });
 */
 
-const feed = new Feed();
+const feed = new Feed(mainWin);
 
 win.add(feed.view);
 
@@ -54,8 +47,8 @@ const image = Ti.UI.createImageView({
 });
 
 win.add(image);
-
-win.open();
+mainWin.add(win);
+mainWin.open();
 
 (new Customer('braunhamburg')).getFeed(10).then(data => {
     feed.addStories(data.stories.map(datum => {
