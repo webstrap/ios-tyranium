@@ -7,10 +7,12 @@ class Story {
     }
 
     render() {
+
+        const imageOffset = this.story.title.length > 42 ? 120 : this.story.title.length > 21 ? 80 : 40;
         const storyView = Titanium.UI.createView({
-            top: this.offset,
+            top: 150,
             left: 0,
-            height: 420,
+            height: 800,
         });
     
         const screenWidth = Ti.Platform.displayCaps.platformWidth;
@@ -32,7 +34,7 @@ class Story {
         
         const image = Ti.UI.createImageView({
             image: `https://img.styla.com/resizer/sfc_${screenWidth}x300/_${this.story.image}`,
-            top: 45,
+            top: 50 + imageOffset,
             left: 0,
             height: 300,
             width: screenWidth,
@@ -40,7 +42,7 @@ class Story {
 
         const body = Ti.UI.createLabel({
             text: this.story.body,
-            top: 360,
+            top: 350 + imageOffset,
             left: 15,
             font:{
                 fontSize: 12,

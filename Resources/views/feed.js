@@ -12,10 +12,11 @@ class Feed {
         this.data.push(stories);
         stories.forEach((story, pos) => {
 
+            const imageOffset = story.title.length > 42 ? 120 : story.title.length > 21 ? 80 : 40;
             const storyView = Titanium.UI.createView({
                 top: this.offset,
                 left: 0,
-                height: 420,
+                height: 410 + imageOffset,
             });
 
             storyView.addEventListener("touchstart", () => {
@@ -38,16 +39,15 @@ class Feed {
                 },
 
                 textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-                top: 50,
+                top: 5,
                 height: Ti.UI.SIZE,
                 top: 5,
                 left: 15,
                 width: screenWidth - 30
             });
-
             const image = Ti.UI.createImageView({
                 image: `https://img.styla.com/resizer/sfc_${screenWidth}x300/_${story.image}`,
-                top: 45,
+                top: imageOffset,
                 left: 0,
                 height: 300,
                 width: screenWidth,
@@ -55,7 +55,7 @@ class Feed {
 
             const body = Ti.UI.createLabel({
                 text: story.body,
-                top: 360,
+                top: 305 + imageOffset,
                 left: 15,
                 font: {
                     fontSize: 12,
@@ -69,7 +69,7 @@ class Feed {
             storyView.add(body);
 
             this.view.add(storyView);
-            this.offset += 450;
+            this.offset += 410 + imageOffset;
         });
     }
 }
