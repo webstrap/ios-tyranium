@@ -1,66 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ti:app xmlns:ti="http://ti.appcelerator.org">
-	<id>com.kenansulayman.about</id>
-	<name>ios-tyranium</name>
-	<version>1.0</version>
-	<publisher>not specified</publisher>
-	<url></url>
-	<description></description>
-	<copyright>not specified</copyright>
-	<icon>appicon.png</icon>
-	<fullscreen>false</fullscreen>
-	<navbar-hidden>false</navbar-hidden>
-	<analytics>true</analytics>
-	<guid>ad28a278-37fd-4416-9116-d56280afe6f2</guid>
-	<property name="ti.ui.defaultunit" type="string">dp</property>
-	<property name="run-on-main-thread" type="bool">true</property>
-	<ios>
-		<enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
-		<use-app-thinning>true</use-app-thinning>
-		<use-jscore-framework>true</use-jscore-framework>
-		<default-background-color>#000000</default-background-color>
-		<plist>
-			<dict>
-				<key>UISupportedInterfaceOrientations~iphone</key>
-				<array>
-					<string>UIInterfaceOrientationPortrait</string>
-				</array>
-				<key>UISupportedInterfaceOrientations~ipad</key>
-				<array>
-					<string>UIInterfaceOrientationPortrait</string>
-					<string>UIInterfaceOrientationPortraitUpsideDown</string>
-					<string>UIInterfaceOrientationLandscapeLeft</string>
-					<string>UIInterfaceOrientationLandscapeRight</string>
-				</array>
-				<key>UIRequiresPersistentWiFi</key>
-				<false/>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-				<key>UIStatusBarHidden</key>
-				<false/>
-				<key>UIStatusBarStyle</key>
-				<string>UIStatusBarStyleDefault</string>
-			</dict>
-		</plist>
-	</ios>
-	<android xmlns:android="http://schemas.android.com/apk/res/android">
-	</android>
-	<mobileweb>
-		<precache>
-		</precache>
-		<splash>
-			<enabled>true</enabled>
-			<inline-css-images>true</inline-css-images>
-		</splash>
-		<theme>default</theme>
-	</mobileweb>
-	<modules>
-	</modules>
-	<deployment-targets>
-		<target device="android">false</target>
-		<target device="ipad">false</target>
-		<target device="iphone">true</target>
-		<target device="mobileweb">false</target>
-	</deployment-targets>
-	<sdk-version>6.3.1.v20171101154403</sdk-version>
+<ti:app 
+  xmlns:ti="http://ti.appcelerator.org">
+  <id>com.kenansulayman.tyranium</id>
+  <name>tyranium</name>
+  <version>1.0</version>
+  <publisher>not specified</publisher>
+  <url>unspecified</url>
+  <description/>
+  <copyright>not specified</copyright>
+  <icon>appicon.png</icon>
+  <fullscreen>false</fullscreen>
+  <navbar-hidden>false</navbar-hidden>
+  <analytics>true</analytics>
+  <guid>0c6c3e07-5546-4802-9444-9297ba98d8f1</guid>
+  <property name="ti.ui.defaultunit" type="string">dp</property>
+  <property name="run-on-main-thread" type="bool">true</property>
+  <ios>
+    <enable-launch-screen-storyboard>true</enable-launch-screen-storyboard>
+    <use-app-thinning>true</use-app-thinning>
+    <plist>
+      <dict>
+        <key>UISupportedInterfaceOrientations~iphone</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+        </array>
+        <key>UISupportedInterfaceOrientations~ipad</key>
+        <array>
+          <string>UIInterfaceOrientationPortrait</string>
+          <string>UIInterfaceOrientationPortraitUpsideDown</string>
+          <string>UIInterfaceOrientationLandscapeLeft</string>
+          <string>UIInterfaceOrientationLandscapeRight</string>
+        </array>
+        <key>UIRequiresPersistentWiFi</key>
+        <false/>
+        <key>UIPrerenderedIcon</key>
+        <false/>
+        <key>UIStatusBarHidden</key>
+        <false/>
+        <key>UIStatusBarStyle</key>
+        <string>UIStatusBarStyleDefault</string>
+      </dict>
+    </plist>
+  </ios>
+  <android 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+  </android>
+  <mobileweb>
+    <precache/>
+    <splash>
+      <enabled>true</enabled>
+      <inline-css-images>true</inline-css-images>
+    </splash>
+    <theme>default</theme>
+  </mobileweb>
+  <modules>
+    <module platform="android">hyperloop</module>
+    <module platform="iphone">hyperloop</module>
+    <module platform="commonjs">ti.cloud</module>
+  </modules>
+  <deployment-targets>
+    <target device="android">true</target>
+    <target device="ipad">true</target>
+    <target device="iphone">true</target>
+    <target device="mobileweb">true</target>
+  </deployment-targets>
+  <sdk-version>6.3.1.v20171101154403</sdk-version>
+  <property name="appc-app-id" type="string">5a0da2b2ba1d0f46dd7c82b5</property>
+  <plugins>
+    <plugin>hyperloop</plugin>
+  </plugins>
+  <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+  <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+  <property name="acs-oauth-secret-development" type="string">DOFGowtq4u25v87QXU8ZWvVZQqYRN1f5</property>
+  <property name="acs-oauth-key-development" type="string">bFglBQct4K4zuJRM2r8yU5Zk9uxtOBJC</property>
+  <property name="acs-api-key-development" type="string">eOogr4cE6zXuBYZ9nlreL1LHQGXBvwUc</property>
+  <property name="acs-username-development" type="string">appc_app_user_dev</property>
+  <property name="acs-password-development" type="string">0RnwGRAf57M1QynKVW</property>
+  <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+  <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+  <property name="acs-oauth-secret-production" type="string">GDE2N6Prb9zoqLUhASKVgJS1DfD6BOpS</property>
+  <property name="acs-oauth-key-production" type="string">ARSsxZVR3ULpNh0JbgbEumM67qch2fZm</property>
+  <property name="acs-api-key-production" type="string">8yadzToEqRNuxYr04h0PIS15vXfk5m3U</property>
+  <property name="acs-username-production" type="string">appc_app_user</property>
+  <property name="acs-password-production" type="string">fIcHcBSlxPuTNRySBz</property>
+  <property name="appc-org-id" type="string">100013521</property>
+  <property name="appc-creator-user-id" type="string">48edd3d5-9fa0-4a6c-8e38-d1cb17fb38c0</property>
 </ti:app>
