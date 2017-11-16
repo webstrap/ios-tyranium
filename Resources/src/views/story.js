@@ -2,7 +2,9 @@ class Story {
     constructor(story, mainWin) {
         this.story = story;
         this.mainWin = mainWin;
-        this.win = Titanium.UI.createWindow({});
+        this.win = Titanium.UI.createWindow({
+            backgroundColor: 'white'
+        });
         this.render();
     }
 
