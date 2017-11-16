@@ -34,8 +34,8 @@ class Story {
             width: screenWidth - 30
         });
         
-        const imageUrl = (this.story.images && this.story.images.length && this.story.images[0].getUrl()) 
-                        || (this.story.products && this.story.products.length && this.story.products[0].getUrl());
+        const imageUrl = (this.story.images && this.story.images.length && this.story.images[0].getCropUrl(screenWidth, 3300)) 
+                        || (this.story.products && this.story.products.length && this.story.products[0].getCropUrl(screenWidth, 300));
         const image = Ti.UI.createImageView({
             image: imageUrl,
             top: 50 + imageOffset,

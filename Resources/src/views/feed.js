@@ -52,8 +52,8 @@ class Feed {
                 left: 15,
                 width: screenWidth - 30,
             });
-            const imageUrl = (story.images && story.images.length && story.images[0].getUrl()) 
-                            || (story.products && story.products.length && story.products[0].getUrl());
+            const imageUrl = (story.images && story.images.length && story.images[0].getCropUrl(screenWidth,300)) 
+                            || (story.products && story.products.length && story.products[0].getCropUrl(screenWidth,300));
             const image = Ti.UI.createImageView({
                 image: imageUrl,
                 top: imageOffset,
