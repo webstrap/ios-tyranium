@@ -6,6 +6,8 @@ class Story {
             top:0,
             backgroundColor: 'white',
         });
+        this.view = Ti.UI.createScrollView({});
+        this.win.add(this.view);
         this.client.getStory(story.slug).then(fetchedStory => {
             this.story = fetchedStory;
             this.render();
@@ -31,14 +33,8 @@ class Story {
             left: 15,
             width: screenWidth - 30
         });
-        this.win.add(title);
+        this.view.add(title);
         let storyOffset = this.story.title.length > 42 ? 120 : this.story.title.length > 21 ? 80 : 40;
-
-        if(this.story.images && this.story.images.length){
-            console.log(this.story.title, "images", JSON.stringify(this.story));
-            this.createImageGallery(this.story.images, storyOffset);
-            storyOffset += 310;
-        }
 
         const introText = Ti.UI.createLabel({
             text: this.story.introText,
@@ -51,25 +47,65 @@ class Story {
             },
             width: screenWidth - 30
         });
-        this.win.add(introText);
+        this.view.add(introText);
+        storyOffset += 200;
+
+        if(this.story.images && this.story.images.length){
+            this.createImageGallery(this.story.images, storyOffset, true);
+            storyOffset += 310;
+        }
+
+        const body = Ti.UI.createLabel({
+            text: this.story.body,
+            top: storyOffset,
+            height: 200,
+            left: 15,
+            font:{
+                fontSize: 12,
+                fontFamily: "Georgia",
+            },
+            width: screenWidth - 30
+        });
+        this.view.add(body);
+        storyOffset += 200;
 
         if(this.story.products && this.story.products.length){
-            console.log(this.story.title, "products", this.story.products);
-            this.createImageGallery(this.story.products, storyOffset);
+            this.createImageGallery(this.story.products, storyOffset, false);
         }
     }
 
-    createImageGallery(images, offset){
+    createImageGallery(images, offset, crop){
+        const screenWidth = Ti.Platform.displayCaps.platformWidth;
         const imageViews = [];
         images.forEach(image => {
-            const imageUrl = image.getCropUrl(screenWidth, 300);
+            let imageUrl;
+            let calculatedWidth = screenWidth;
+            let calculatedHeight = 300;
+            if (crop) {
+                imageUrl = image.getCropUrl(screenWidth, 300);
+
+            } else {
+                calculatedWidth = 300 / image.ratio;
+                if(calculatedWidth > screenWidth) {
+                    calculatedHeight = screenWidth * image.ratio;
+                    calculatedWidth = screenWidth;
+                }
+                imageUrl = image.getScaledByHeight(calculatedHeight);
+            }
             const imageView = Ti.UI.createImageView({
                 image: imageUrl,
                 top:0,
+                height: calculatedHeight,
+                width: calculatedWidth,
+            });
+            const imageWrapper = Ti.UI.createView({
+                top:0,
+                left:0,
                 height: 300,
                 width: screenWidth,
             });
-            imageViews.push(imageView);
+            imageWrapper.add(imageView);
+            imageViews.push(imageWrapper);
         });
         const gallery = Ti.UI.createScrollableView({
             left: 0,
@@ -80,7 +116,7 @@ class Story {
             views:imageViews,
             showPagingControl:true
         });
-        this.win.add(gallery);
+        this.view.add(gallery);
     }
 }
 

@@ -18,9 +18,10 @@ function storyConverter(story) {
             result.images.push(new Image(element));
         }
         if(element.type == "products" && element.products.length){
-            const products = element.products.map(product => {return new Image(product)});
-            console.log("products", products.length);
-            result.products.push(products);
+            element.products.forEach(product => {
+                const productImage = new Image(product);
+                result.products.push(productImage);
+            })
         }
         if(element.type == "paragraph" && !result.body){
             result.body = element.content.replace(removeHtmlRegEx, "");

@@ -61,7 +61,6 @@ class Feed {
                 height: 300,
                 width: screenWidth,
             });
-
             const body = Ti.UI.createLabel({
                 text: story.body,
                 top: 305 + imageOffset,
