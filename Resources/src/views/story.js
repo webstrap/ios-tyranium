@@ -32,8 +32,10 @@ class Story {
             width: screenWidth - 30
         });
         
+        const imageUrl = (this.story.images && this.story.images.length && this.story.images[0].getUrl()) 
+                        || (this.story.products && this.story.products.length && this.story.products[0].getUrl());
         const image = Ti.UI.createImageView({
-            image: `https://img.styla.com/resizer/sfc_${screenWidth}x300/_${this.story.image}`,
+            image: imageUrl,
             top: 50 + imageOffset,
             left: 0,
             height: 300,

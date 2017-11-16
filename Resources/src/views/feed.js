@@ -1,4 +1,5 @@
 const Story = require("./story");
+const Customer = require('../api/datasource');
 
 class Feed {
     constructor(mainWin) {
@@ -6,6 +7,12 @@ class Feed {
         this.data = [];
         this.offset = 10;
         this.mainWin = mainWin;
+
+        this.braunhamburg = new Customer('braunhamburg');
+        
+        this.braunhamburg.getFeed().then(stories => {
+            this.addStories(stories);
+        }).catch(e => console.log(e));
     }
 
     addStories(stories) {
@@ -43,10 +50,12 @@ class Feed {
                 height: Ti.UI.SIZE,
                 top: 5,
                 left: 15,
-                width: screenWidth - 30
+                width: screenWidth - 30,
             });
+            const imageUrl = (story.images && story.images.length && story.images[0].getUrl()) 
+                            || (story.products && story.products.length && story.products[0].getUrl());
             const image = Ti.UI.createImageView({
-                image: `https://img.styla.com/resizer/sfc_${screenWidth}x300/_${story.image}`,
+                image: imageUrl,
                 top: imageOffset,
                 left: 0,
                 height: 300,
@@ -61,7 +70,7 @@ class Feed {
                     fontSize: 12,
                     fontFamily: "Georgia",
                 },
-                width: screenWidth - 30
+                width: screenWidth - 30,
             });
 
             storyView.add(title);
