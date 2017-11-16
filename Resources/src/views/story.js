@@ -5,6 +5,7 @@ class Story {
         this.win = Titanium.UI.createWindow({
             top:0,
             backgroundColor: 'white',
+            barColor: '#302b27'
         });
         this.view = Ti.UI.createScrollView({});
         this.win.add(this.view);
