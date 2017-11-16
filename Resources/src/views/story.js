@@ -103,6 +103,14 @@ class Story {
                 left:0,
                 height: 300,
                 width: screenWidth,
+                backgroundGradient: {
+                    type: 'linear',
+                    colors: ['#66FFFFFF', '#660F0F0F'],
+                    startPoint: { x: 0, y: 270 },
+                    endPoint: { x: 0, y: '100%' },
+                    backFillStart:false,
+                    zIndex: 100,
+                  }
             });
             imageWrapper.add(imageView);
             imageViews.push(imageWrapper);
@@ -111,7 +119,7 @@ class Story {
             left: 0,
             top: offset,
             width: screenWidth,
-            height: 310,
+            height: 300,
             backgroundColor: 'white',
             views:imageViews,
             showPagingControl:true
