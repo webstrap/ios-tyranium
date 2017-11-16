@@ -1,24 +1,33 @@
 const Image = require("./image");
-function convertStory(story) {
-    if( !story || !story.sections ) { return story; };
+const removeHtmlRegEx = /(<([^>]+)>)/ig;
 
+function storyConverter(story) {
     const result = {};
-    result.title    = story.sections.header 
-                    && story.sections.header.content;
-
-    result.body     = story.sections.copy 
-                    && story.sections.copy.content;
-
-    result.products = story.sections.product 
-                    && story.sections.product.products 
-                    && story.sections.product.products.map(image => new Image(image));
-
-    result.images   = story.sections.visuals 
-                    && story.sections.visuals.images 
-                    && story.sections.visuals.images.map( image => new Image(image));
-                    
+    result.title    = story.title;
+    console.log(story.introText);
+    result.introText = story.introText.content.replace(removeHtmlRegEx, "");
+    result.images = [];
+    result.products = [];
+    result.body = "";
+    if (story.leadImage) {
+        result.images.push(new Image(story.leadImage));
+    }
+    story.elements.forEach(element => {
+        console.log(element.type);
+        if(element.type == "image"){
+            result.images.push(new Image(element));
+        }
+        if(element.type == "products" && element.products.length){
+            const products = element.products.map(product => {return new Image(product)});
+            console.log("products", products.length);
+            result.products.push(products);
+        }
+        if(element.type == "paragraph" && !result.body){
+            result.body = element.content.replace(removeHtmlRegEx, "");
+        }
+    });
     result.categories = story.categories;
     return result;
 }
 
-module.exports = convertStory;
+module.exports = storyConverter;

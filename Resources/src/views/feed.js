@@ -8,9 +8,9 @@ class Feed {
         this.offset = 10;
         this.mainWin = mainWin;
 
-        this.braunhamburg = new Customer('braunhamburg');
+        this.client = new Customer('braunhamburg');
         
-        this.braunhamburg.getFeed().then(stories => {
+        this.client.getFeed().then(stories => {
             this.addStories(stories);
         }).catch(e => console.log(e));
     }
@@ -32,7 +32,7 @@ class Feed {
             });
 
             storyView.addEventListener("click", () => {
-                const storyWin = new Story(story, this.mainWin);
+                const storyWin = new Story(story, this.client);
                 this.mainWin.openWindow(storyWin.win, { animated: true });
             });
 

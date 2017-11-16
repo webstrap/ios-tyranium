@@ -2,6 +2,7 @@ const Promise = require('../util/bluebird');
 
 const XHR = require('../util/xhr');
 const events = require('../util/events');
+const feedConverter = require('./feedConverter');
 const storyConverter = require('./storyConverter');
 
 class Customer extends events {
@@ -16,8 +17,8 @@ class Customer extends events {
         this.loading = false;
     }
 
-    _getStoryAPIURL() {
-        return `https://storyapi.styla.com/api/users/${this.customerName}?domain=${this.customerName}`;
+    _getStoryURL(slug) {
+        return `https://redpanda.prod.us.magalog.net/v1/story/${this.customerName}/${slug}`;
     }
 
     _getFeedURL() {
@@ -31,13 +32,23 @@ class Customer extends events {
 
         return worker.then(reply => {
             this.loading = false;
-            this.offset = reply.data.Feed && reply.data.Feed.meta.navigation.next;
-            return reply.data.Feed.stories.map(storyConverter);
+            if(reply.data.Feed){
+                this.offset = reply.data.Feed && reply.data.Feed.meta.navigation.next;
+                return feedConverter(reply.data.Feed.stories);
+            }
+            if(reply.data.slug){
+                return storyConverter(reply.data);
+            }
+            
         });
     }
 
-    getConfig() {
-        return this._getAndParseIfNeeded(this._getStoryAPIURL());
+    getStory(slug) {
+        if(this.loading){
+            return Promise.reject();
+        }
+        this.loading = true;
+        return this._getAndParseIfNeeded(this._getStoryURL(slug));
     }
 
     getFeed() {
